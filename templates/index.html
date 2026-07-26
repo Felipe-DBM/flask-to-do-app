@@ -14,26 +14,34 @@
             <h1 class="logo">📝 Flask To-Do</h1>
         </header>
 
-        <!-- Static demo version (NO Jinja) -->
         <section class="card">
-            <form action="#" method="post" class="add-form">
-                <input name="title" placeholder="What do you need to do?" autocomplete="off" autofocus />
+            <form action="{{ url_for('add') }}" method="post" class="add-form">
+                <input name="title" placeholder="What do you need to do?" autocomplete="off" autofocus required />
                 <button type="submit">Add</button>
             </form>
+
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    <ul class="flashes">
+                        {% for category, message in messages %}
+                            <li class="{{ category }}">{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            {% endwith %}
         </section>
 
         <section class="card">
             <ul class="tasks">
-                <li class="task">
-                    <button class="toggle" title="Mark complete/undo" aria-label="toggle">✓</button>
-                    <span class="title">Buy groceries</span>
-                    <button class="delete" title="Delete" aria-label="delete">×</button>
-                </li>
-                <li class="task done">
-                    <button class="toggle" title="Mark complete/undo" aria-label="toggle">✓</button>
-                    <span class="title">Finish Flask project</span>
-                    <button class="delete" title="Delete" aria-label="delete">×</button>
-                </li>
+                {% for task in tasks %}
+                    <li class="task{% if task.done %} done{% endif %}">
+                        <button class="toggle" title="Mark complete/undo" aria-label="toggle">✓</button>
+                        <span class="title">{{ task.title }}</span>
+                        <button class="delete" title="Delete" aria-label="delete">×</button>
+                    </li>
+                {% else %}
+                    <li class="task empty">No tasks yet.</li>
+                {% endfor %}
             </ul>
         </section>
 
