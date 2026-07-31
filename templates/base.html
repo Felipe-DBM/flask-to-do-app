@@ -4,8 +4,8 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Flask To-Do (Base Layout)</title>
-    <link rel="stylesheet" href="./style.css">
+    <title>Flask To-Do (Static Demo)</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
 </head>
 
 <body>
@@ -14,16 +14,9 @@
             <h1 class="logo">📝 Flask To-Do</h1>
         </header>
 
-        <!--
-      This is a static base.html (no Jinja).
-      In Flask later, you'd put your page content where this comment is,
-      using template blocks (e.g., `{% block content %}{% endblock %}`).
-    -->
-        <section class="card">
-            <p>This is the base layout. Replace this with your page content.</p>
-        </section>
-
+        {% block content %}{% endblock %}
     </main>
+
     <footer class="footer">
         <small>Built with Flask &amp; SQLite</small>
     </footer>

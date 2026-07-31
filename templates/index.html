@@ -1,54 +1,36 @@
-<!doctype html>
-<html lang="en">
+{% extends "base.html" %}
 
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Flask To-Do (Static Demo)</title>
-    <link rel="stylesheet" href="/static/style.css">
-</head>
 
-<body>
-    <main class="container">
-        <header class="header">
-            <h1 class="logo">📝 Flask To-Do</h1>
-        </header>
+{% block content %}
+<section class="card">
+    <form action="{{ url_for('add') }}" method="post" class="add-form">
+        <input name="title" placeholder="What do you need to do?" autocomplete="off" autofocus required />
+        <button type="submit">Add</button>
+    </form>
 
-        <section class="card">
-            <form action="{{ url_for('add') }}" method="post" class="add-form">
-                <input name="title" placeholder="What do you need to do?" autocomplete="off" autofocus required />
-                <button type="submit">Add</button>
-            </form>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    <ul class="flashes">
+        {% for category, message in messages %}
+        <li class="{{ category }}">{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
+</section>
 
-            {% with messages = get_flashed_messages(with_categories=true) %}
-                {% if messages %}
-                    <ul class="flashes">
-                        {% for category, message in messages %}
-                            <li class="{{ category }}">{{ message }}</li>
-                        {% endfor %}
-                    </ul>
-                {% endif %}
-            {% endwith %}
-        </section>
+<section class="card">
+    <ul class="tasks">
+        {% for task in tasks %}
+        <li class="task{% if task.done %} done{% endif %}">
+            <button class="toggle" title="Mark complete/undo" aria-label="toggle">✓</button>
+            <span class="title">{{ task.title }}</span>
+            <button class="delete" title="Delete" aria-label="delete">×</button>
+        </li>
+        {% else %}
+        <li class="task empty">No tasks yet.</li>
+        {% endfor %}
+    </ul>
+</section>
 
-        <section class="card">
-            <ul class="tasks">
-                {% for task in tasks %}
-                    <li class="task{% if task.done %} done{% endif %}">
-                        <button class="toggle" title="Mark complete/undo" aria-label="toggle">✓</button>
-                        <span class="title">{{ task.title }}</span>
-                        <button class="delete" title="Delete" aria-label="delete">×</button>
-                    </li>
-                {% else %}
-                    <li class="task empty">No tasks yet.</li>
-                {% endfor %}
-            </ul>
-        </section>
-
-        <footer class="footer">
-            <small>Built with Flask &amp; SQLite</small>
-        </footer>
-    </main>
-</body>
-
-</html>
+{% endblock %}
