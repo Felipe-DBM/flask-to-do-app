@@ -20,6 +20,7 @@
 </section>
 
 <section class="card">
+    {% if tasks %}
     <ul class="tasks">
         {% for task in tasks %}
         <li class="task{% if task.done %} done{% endif %}">
@@ -30,6 +31,7 @@
         {% else %}
         <li class="task empty">No tasks yet.</li>
         {% endfor %}
+    {% endif %}
     </ul>
 </section>
 

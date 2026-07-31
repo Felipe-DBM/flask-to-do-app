@@ -24,7 +24,8 @@ with app.app_context():
 
 @app.get("/")
 def home():
-    tasks = Task.query.order_by(Task.created_at.desc()).all()
+    
+    tasks = Task.query.order_by(Task.done.asc(), Task.created_at.desc()).all()
     return render_template("index.html", tasks=tasks)
 
 
