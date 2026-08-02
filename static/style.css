@@ -78,6 +78,10 @@ body {
     border-bottom: 1px solid #1e293b;
 }
 
+.inline-form {
+    display: contents;
+}
+
 .task:last-child {
     border-bottom: 0;
 }

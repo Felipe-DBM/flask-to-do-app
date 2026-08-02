@@ -24,7 +24,7 @@ with app.app_context():
 
 @app.get("/")
 def home():
-    
+
     tasks = Task.query.order_by(Task.done.asc(), Task.created_at.desc()).all()
     return render_template("index.html", tasks=tasks)
 
@@ -42,5 +42,17 @@ def add():
     return redirect(url_for("home"))
 
 
+@app.post("/delete/<int:task_id>")
+def delete(task_id):
+    task = Task.query.get_or_404(task_id)
+    db.session.delete(task)
+    db.session.commit()
+    flash("Task deleted")
+    return redirect(url_for("home"))
+
+
 if __name__ == '__main__':
     app.run(debug=True)
+
+
+#Me quedé en el video nro 9

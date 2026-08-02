@@ -26,7 +26,9 @@
         <li class="task{% if task.done %} done{% endif %}">
             <button class="toggle" title="Mark complete/undo" aria-label="toggle">✓</button>
             <span class="title">{{ task.title }}</span>
-            <button class="delete" title="Delete" aria-label="delete">×</button>
+            <form action="{{ url_for('delete', task_id=task.id) }}" method="post" class="inline-form">
+                <button type="submit" class="delete" title="Delete" aria-label="delete">×</button>
+            </form>
         </li>
         {% else %}
         <li class="task empty">No tasks yet.</li>
