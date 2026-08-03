@@ -61,6 +61,3 @@ def toggle(task_id):
 
 if __name__ == '__main__':
     app.run(debug=True)
-
-
-#Me quedé en el video nro 10
