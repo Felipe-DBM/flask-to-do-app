@@ -50,9 +50,17 @@ def delete(task_id):
     flash("Task deleted")
     return redirect(url_for("home"))
 
+@app.post("/toggle/<int:task_id>")
+def toggle(task_id):
+    task = Task.query.get_or_404(task_id)
+    task.done = not task.done
+    db.session.commit()
+    flash("Task completed" if task.done else "Marked active")
+    return redirect(url_for("home"))
+
 
 if __name__ == '__main__':
     app.run(debug=True)
 
 
-#Me quedé en el video nro 9
+#Me quedé en el video nro 10
