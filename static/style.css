@@ -114,19 +114,27 @@ body {
     outline: 2px solid #ef444455;
 }
 
-.flash {
+.flashes {
     list-style: none;
     padding: 0;
     margin: 0 0 12px 0;
 }
 
-.flash li {
-    background: #065f46;
-    border: 1px solid #10b981;
-    padding: 10px 12px;
+.flashes li {
+    display: block;
+    background: linear-gradient(135deg, #065f46, #047857);
+    border: 1px solid #34d399;
+    padding: 12px 14px;
     border-radius: 10px;
-    margin-bottom: 8px;
     color: #ecfdf5;
+    font-weight: 600;
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
+}
+
+.flashes li.error {
+    background: linear-gradient(135deg, #7f1d1d, #b91c1c);
+    border-color: #f87171;
+    color: #fef2f2;
 }
 
 .empty {

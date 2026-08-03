@@ -10,10 +10,9 @@
 
     {% with messages = get_flashed_messages(with_categories=true) %}
     {% if messages %}
+    {% set latest_message = messages[-1] %}
     <ul class="flashes">
-        {% for category, message in messages %}
-        <li class="{{ category }}">{{ message }}</li>
-        {% endfor %}
+        <li class="{{ latest_message[0] }}">{{ latest_message[1] }}</li>
     </ul>
     {% endif %}
     {% endwith %}
